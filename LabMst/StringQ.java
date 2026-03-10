@@ -1,0 +1,34 @@
+package LabMst;
+
+public class StringQ {
+    public static void main(String[] args) {
+        String[] words = {"abcw", "baz", "foo", "bar", "xtfn", "abcdef"};
+        System.out.println(maxProduct(words));
+    }
+
+    public static int maxProduct(String[] words) {
+        int n = words.length;
+        int[] bitMasks = new int[n];
+        int[] lengths = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            int mask = 0;
+            for (char c : words[i].toCharArray()) {
+                mask |= 1 << (c - 'a');
+            }
+            bitMasks[i] = mask;
+            lengths[i] = words[i].length();
+        }
+
+        int maxProduct = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if ((bitMasks[i] & bitMasks[j]) == 0) { 
+                    maxProduct = Math.max(maxProduct, lengths[i] * lengths[j]);
+                }
+            }
+        }
+
+        return maxProduct;
+    }
+}
