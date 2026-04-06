@@ -1,0 +1,56 @@
+ALGORITHM: Max Points on a Line (Using Slope Normalization)
+
+Input:
+
+* 2D array points[][] where each point = [x, y]
+
+Output:
+
+* Maximum number of points lying on the same straight line
+
+Steps:
+
+1. Define Helper Function (Reducer):
+
+   * Given two points, compute slope as:
+     dx = x1 - x2
+     dy = y1 - y2
+   * If dx == 0:
+     return (vertical line representation)
+   * If dy == 0:
+     return (horizontal line representation)
+   * Else:
+
+     * Compute gcd(dx, dy)
+     * Normalize slope as (dx/gcd, dy/gcd)
+
+2. Initialize:
+
+   * Let n = number of points
+   * res = 1
+
+3. Iterate Over All Pairs:
+   For each pair of points (i, j):
+   a. Compute slope between i and j using reducer
+   b. Initialize counter = 2
+
+   c. Check remaining points:
+   For each k > j:
+   - Compute slope between i and k
+   - If slope matches with (i, j):
+   Increment counter
+
+   d. Update result:
+   res = max(res, counter)
+
+4. Return Result:
+
+   * Return res
+
+Time Complexity:
+
+* O(n^3)
+
+Space Complexity:
+
+* O(1)
