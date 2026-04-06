@@ -1,0 +1,20 @@
+Algo 1:
+1. Store all n strings.
+2. For each query string q:
+3. For each stored string str:
+    If str.length == q.length
+        Compare characters.
+        Count mismatches.
+        If mismatch count == 1 → return true.
+4. If any string returns true → print YES, else NO.
+// This directly follows the zArray / count logic.
+
+Algo 2:  (Using rolling hash)
+
+1. Read n dictionary strings and store their hash values in a HashSet.
+2. For each query string q:
+3. For each position i in q:
+4. Replace q[i] with other characters (a–c except original).
+5. Compute hash of the modified string.
+6. If this hash exists in the set → print "YES" and stop.
+7. If no modification matches → print "NO".
