@@ -1,0 +1,57 @@
+ALGORITHM: Alien Dictionary (Topological Sort)
+
+Input:
+
+* Integer n (number of words)
+* Array of strings s[]
+
+Output:
+
+* A valid ordering of characters OR "Impossible"
+
+Steps:
+
+1. Initialize:
+
+   * Create a 26x26 matrix 'a' to store relations between characters
+   * Create a visited array 'b' of size 26 initialized to 0
+   * Create result array 'res' of size 26 filled with '.'
+
+2. Build Graph (Constraints):
+   For each pair of adjacent words s[i] and s[i+1]:
+   a. Compare characters one by one
+   b. Find first position j where characters differ
+   c. If found:
+   - Let u = s[i][j], v = s[i+1][j]
+   - If no relation exists:
+   a[u][v] = -1   (u comes before v)
+   a[v][u] = 1    (reverse relation)
+   - If contradictory relation exists:
+   Output "Impossible" and stop
+   d. If no differing character found:
+   - If length of s[i] > length of s[i+1]:
+   Output "Impossible" and stop
+
+3. Topological Sorting:
+   Repeat until all 26 characters are placed:
+   a. Find a character 'i' not visited such that:
+   - No incoming edges (no a[i][j] > 0)
+   b. If no such character exists:
+   - Output "Impossible" and stop
+   c. Add character 'i' to result
+   d. Mark 'i' as visited
+   e. Remove its outgoing edges:
+   - For all j, if a[i][j] < 0:
+   set a[j][i] = 0
+
+4. Output:
+
+   * Print the resulting character order
+
+Time Complexity:
+
+* O(n * L + 26^2), where L = max length of strings
+
+Space Complexity:
+
+* O(26^2)
