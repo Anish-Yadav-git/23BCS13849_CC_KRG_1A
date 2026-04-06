@@ -1,0 +1,59 @@
+ALGORITHM: Cheapest Flights Within K Stops (BFS + Relaxation)
+
+Input:
+
+* Integer n (number of nodes)
+* 2D array flights[][] where flights[i] = [u, v, cost]
+* Source node src
+* Destination node dst
+* Integer k (maximum stops allowed)
+
+Output:
+
+* Minimum cost from src to dst within k stops OR -1
+
+Steps:
+
+1. Build Graph:
+
+   * Create an adjacency list where each node stores:
+     (neighbor, cost)
+
+2. Initialize:
+
+   * Create a distance array 'dist' of size n, initialize with infinity
+   * Set dist[src] = 0
+   * Create a queue storing (stops, node, cost)
+   * Push (0, src, 0) into queue
+
+3. BFS Traversal:
+   While queue is not empty:
+   a. Remove front element (stops, node, cost)
+
+   b. If stops > k:
+   - Skip this state
+
+   c. For each neighbor of node:
+   - Let adjNode = neighbor
+   - Let price = edge cost
+
+   ```
+    - If cost + price < dist[adjNode] AND stops <= k:
+          i. Update dist[adjNode] = cost + price
+          ii. Push (stops + 1, adjNode, cost + price) into queue
+   ```
+
+4. Result:
+
+   * If dist[dst] is still infinity:
+     Return -1
+   * Else:
+     Return dist[dst]
+
+Time Complexity:
+
+* O(K * E)
+
+Space Complexity:
+
+* O(V + E)
