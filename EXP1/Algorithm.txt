@@ -1,0 +1,68 @@
+ALGORITHM: Triangular Sum (Optimized Mathematical Approach)
+
+Input:
+
+* Integer array nums[]
+
+Output:
+
+* Final triangular sum (mod 10)
+
+Concept:
+
+* Instead of simulating the triangle formation step by step,
+  compute contribution of each element directly using pattern observation.
+
+Steps:
+
+1. Initialize:
+
+   * Let n = size of nums
+   * res = 0
+   * i = 0, j = n - 1
+   * ctr = 0
+
+2. Edge Case:
+
+   * If n == 1:
+     Return nums[0]
+
+3. Two-Pointer Contribution:
+   While i < j:
+   a. For left element nums[i]:
+   - If i == 0:
+   Add nums[i]
+   - Else:
+   Add nums[i] * (n - 1) * ctr
+
+   b. For right element nums[j]:
+   - If j == n - 1:
+   Add nums[j]
+   - Else:
+   Add nums[j] * (n - 1) * ctr
+
+   c. Take modulo 10:
+   res = res % 10
+
+   d. Move pointers:
+   i++
+   j--
+   ctr++
+
+4. Middle Element (if n is odd):
+
+   * If n is odd:
+     Add nums[i] * (n - 2) * (n / 2)
+     res = res % 10
+
+5. Return Result:
+
+   * Return res
+
+Time Complexity:
+
+* O(n)
+
+Space Complexity:
+
+* O(1)
